@@ -1,5 +1,7 @@
+import { NuxtConfig } from '@nuxt/types'
 
-export default {
+const config: NuxtConfig = {
+  dev: process.env.NODE_ENV !== 'production',
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -59,5 +61,9 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+  router: {
   }
 }
+
+export default config
