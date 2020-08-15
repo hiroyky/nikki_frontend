@@ -32,6 +32,11 @@ const config: NuxtConfig = {
   */
   css: [
   ],
+  styleResources: {
+    scss: [
+      '~/assets/sass/bulma.scss'
+    ]
+  },
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
@@ -54,7 +59,8 @@ const config: NuxtConfig = {
   */
   modules: [
     // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy'
+    'nuxt-buefy',
+    '@nuxtjs/style-resources'
   ],
   /*
   ** Build configuration

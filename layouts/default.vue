@@ -1,74 +1,55 @@
 <template>
   <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="/"
-        >
-          <img
-            src="~assets/buefy.png"
-            alt="Buefy"
-            height="28"
-          >
-        </a>
+    <site-header />
+    <site-navigation />
 
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>
+    <n-article>
+      <template v-slot:title>
+        タイトル
+      </template>
+      <template v-slot:updated-at>
+        2020年8月15日
+      </template>
+      <template v-slot:body>
+        本文
+      </template>
+    </n-article>
+
+    <nav class="pagination" role="pagination" aria-label="pagination">
+      <div class="container">
+        <a class="pagination-previous">前の記事</a>
+        <a class="pagination-next">次の記事</a>
       </div>
     </nav>
 
-    <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li
-            v-for="(item, key) of items"
-            :key="key"
-          >
-            <nuxt-link
-              :to="item.to"
-              exact-active-class="is-active"
-            >
-              <b-icon :icon="item.icon" /> {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="container column is-10">
-        <nuxt />
+    <footer class="footer">
+      <div class="container">
+        (C) Yokoyama
       </div>
-    </section>
+    </footer>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import SiteHeader from '~/components/organisms/SiteHeader.vue'
+import SiteNavigation from '~/components/organisms/SiteNavigation.vue'
+import NArticle from '~/components/organisms/NArticle.vue'
 
-@Component({})
+@Component({
+  components: {
+    NArticle,
+    SiteNavigation,
+    SiteHeader
+  }
+})
 export default class extends Vue {
-  private items = [
-    {
-      title: 'Home',
-      icon: 'home',
-      to: { name: 'index' }
-    },
-    {
-      title: 'Inspire',
-      icon: 'lightbulb',
-      to: { name: 'inspire' }
-    }
-  ]
 }
 </script>
+
+<style lang="scss">
+header {
+  background-color: $info;
+}
+</style>
