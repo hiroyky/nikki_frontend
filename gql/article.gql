@@ -1,0 +1,11 @@
+query ArticleGql($id: ID!) {
+  article(id: $id) {
+    id,
+    title,
+    body,
+    description,
+    thumbnailImage,
+    postedAt,
+    updatedAt
+  }
+}

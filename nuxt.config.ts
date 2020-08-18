@@ -60,7 +60,8 @@ const config: NuxtConfig = {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/apollo'
   ],
   /*
   ** Build configuration
@@ -69,6 +70,13 @@ const config: NuxtConfig = {
   build: {
   },
   router: {
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:8080/viewer/query'
+      }
+    }
   }
 }
 

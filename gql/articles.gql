@@ -1,0 +1,19 @@
+query ArticlesGql($limit: Int, $offset: Int) {
+  articles(page: { limit: $limit, offset: $offset }) {
+    nodes {
+      id,
+      title,
+      body,
+      description,
+      thumbnailImage,
+      postedAt,
+      updatedAt
+    },
+    pageInfo {
+      page,
+      paginationLength,
+      hasNextPage,
+      hasPreviousPage
+    }
+  }
+}
