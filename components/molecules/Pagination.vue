@@ -1,8 +1,12 @@
 <template>
   <nav v-if="!hide" class="pagination" role="pagination" aria-label="pagination">
     <div class="container">
-      <pagination-previous v-if="hasPreviousPage" @click="onPreviousClick" />
-      <pagination-next v-if="hasNextPage" @click="onNextClick" />
+      <pagination-previous :to="previousPage">
+        {{ previousText || '前のページ' }}
+      </pagination-previous>
+      <pagination-next :to="nextPage">
+        {{ nextText || '次のページ' }}
+      </pagination-next>
     </div>
   </nav>
 </template>
@@ -12,6 +16,7 @@ import Vue from 'vue'
 import { Component, Prop, Emit } from 'vue-property-decorator'
 import PaginationPrevious from '~/components/atoms/PaginationPrevious.vue'
 import PaginationNext from '~/components/atoms/PaginationNext.vue'
+import { RawLocation } from 'vue-router'
 
   @Component({
     components: {
@@ -19,23 +24,22 @@ import PaginationNext from '~/components/atoms/PaginationNext.vue'
       PaginationPrevious
     }
   })
-export default class extends Vue {
-  @Prop()
-  hasPreviousPage?: boolean
+  export default class extends Vue {
 
   @Prop()
-  hasNextPage?: boolean
+  previousPage?: RawLocation
+
+  @Prop()
+  previousText?: string
+
+  @Prop()
+  nextPage?: RawLocation
+
+  @Prop()
+  nextText?: string
 
   get hide (): boolean {
-    return !this.hasNextPage && !this.hasPreviousPage
-  }
-
-  @Emit('previous-click')
-  onPreviousClick () {
-  }
-
-  @Emit('next-click')
-  onNextClick () {
+    return !this.previousPage && !this.nextPage
   }
 }
 </script>

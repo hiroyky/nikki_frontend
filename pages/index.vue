@@ -6,10 +6,8 @@
       </div>
 
       <pagination
-        :has-previous-page="articles.pageInfo.hasPreviousPage"
-        :has-next-page="articles.pageInfo.hasNextPage"
-        @previous-click="onPreviousClick"
-        @next-click="onNextClick"
+      :next-page="nextPage"
+      :previous-page="previousPage"
       />
     </div>
   </section>
@@ -21,6 +19,8 @@ import { Component } from 'vue-property-decorator'
 import ArticlesGql from '~/gql/articles.gql'
 import NArticle from '~/components/organisms/NArticle.vue'
 import Pagination from '~/components/molecules/Pagination.vue'
+import { RawLocation } from 'vue-router'
+import { Articles } from '~/@types'
 
 @Component({
   components: {
@@ -30,17 +30,44 @@ import Pagination from '~/components/molecules/Pagination.vue'
   apollo: {
     articles: {
       query: ArticlesGql,
-      variables: { limit: 100, offset: 0 }
+      variables() {
+        return { limit: this.limit, offset: (this.page - 1 ) * this.limit }
+      }
     }
   }
 })
 export default class extends Vue {
-  onPreviousClick () {
-    console.log('on previous')
+  private articles?: Articles
+
+  get nextPage(): RawLocation | null {
+    if (this.$apollo.loading || !this.articles) {
+      return null
+    }
+    return this.articles.pageInfo.hasNextPage ? `/?page=${this.articles.pageInfo.page + 1}` : null
   }
 
-  onNextClick () {
-    console.log('on next')
+  get previousPage(): RawLocation | null {
+    if (this.$apollo.loading || !this.articles) {
+      return null
+    }
+
+    return this.articles.pageInfo.hasPreviousPage ? `/?page=${this.articles.pageInfo.page - 1}` : null
+  }
+
+  get limit(): number {
+    return 10
+  }
+
+  get page(): number {
+    const pageStr = this.$route.query['page']
+    if(!pageStr || typeof pageStr !== 'string') {
+      return 1
+    }
+    const page = Number.parseInt(pageStr)
+    if(isNaN(page) || page <= 0) {
+      return 1
+    }
+    return page
   }
 }
 </script>

@@ -3,6 +3,15 @@ export interface Article {
     title: string;
     body: string;
     updatedAt: Date;
+
+    previousArticle: {
+      id: string;
+      title: string;
+    } | null,
+    nextArticle: {
+      id: string;
+      title: string;
+    } | null
 }
 
 export interface Articles {

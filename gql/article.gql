@@ -6,6 +6,15 @@ query ArticleGql($id: ID!) {
     description,
     thumbnailImage,
     postedAt,
-    updatedAt
+    updatedAt,
+
+    previousArticle {
+      id,
+      title
+    },
+    nextArticle {
+      id,
+      title
+    }
   }
 }
