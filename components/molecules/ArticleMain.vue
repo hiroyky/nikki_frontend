@@ -6,7 +6,7 @@
           <slot name="title" />
         </nuxt-link>
       </article-title>
-      <article-datetime>更新日時: <slot name="updatedAt" /></article-datetime>
+      <article-datetime>投稿日時: <slot name="postedAt" /></article-datetime>
       <article-body><slot name="body" /></article-body>
     </div>
   </div>

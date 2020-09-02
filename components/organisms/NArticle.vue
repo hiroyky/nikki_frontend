@@ -7,8 +7,8 @@
       <template v-slot:body>
         {{ body }}
       </template>
-      <template v-slot:updatedAt>
-        {{ updatedAt }}
+      <template v-slot:postedAt>
+        {{ postedAt }}
       </template>
     </article-main>
   </div>
@@ -42,8 +42,8 @@ export default class extends Vue {
       return this.article ? this.article.body : ''
     }
 
-    get updatedAt (): string {
-      return this.article ? moment(this.article.updatedAt).format('YYYY年MM月DD日 HH:mm') : ''
+    get postedAt (): string {
+      return this.article ? moment(this.article.postedAt).format('YYYY年MM月DD日 HH:mm') : ''
     }
 }
 

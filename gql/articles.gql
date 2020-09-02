@@ -1,5 +1,5 @@
-query ArticlesGql($limit: Int, $offset: Int) {
-  articles(page: { limit: $limit, offset: $offset }) {
+query ArticlesGql($sort: String, $order: Order, $limit: Int, $offset: Int) {
+  articles(sort: {sort: $sort, order: $order}, page: { limit: $limit, offset: $offset }) {
     nodes {
       id,
       title,

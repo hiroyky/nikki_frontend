@@ -31,7 +31,12 @@ import { Articles } from '~/@types'
     articles: {
       query: ArticlesGql,
       variables() {
-        return { limit: this.limit, offset: (this.page - 1 ) * this.limit }
+        return { 
+          limit: this.limit, 
+          offset: (this.page - 1 ) * this.limit,
+          sort: 'postedAt',
+          order: 'DESC',
+        }
       }
     }
   }

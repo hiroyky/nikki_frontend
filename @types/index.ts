@@ -2,6 +2,7 @@ export interface Article {
     id: string;
     title: string;
     body: string;
+    postedAt: Date;
     updatedAt: Date;
 
     previousArticle: {
@@ -19,6 +20,7 @@ export interface Articles {
     id: string;
     title: string;
     body: string;
+    postedAt: Date;
     updatedAt: Date;
   }>;
 
